@@ -77,10 +77,13 @@ export const ConsolePage = () => {
 
 				<style>
 					{`
+					* {
+						overflow: hidden !important;
+					}
+
 					body {
 						width: 100vh;
 						height: 100vh;
-						overflow: none !important;
 						background-color: rgb(0, 0, 0);
 						color: rgb(255, 255, 255);
 						
