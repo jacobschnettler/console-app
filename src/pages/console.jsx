@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Card } from 'react-bootstrap';
 import { fetchHomeServices } from '../utils';
+import { LocalAreaDataComponent } from '../components';
+
+export const consoleFontSize = '22px';
+export const componentWidth = '700px';
 
 export const ConsolePage = () => {
 	const [Services, setServices] = useState([]);
@@ -29,7 +33,7 @@ export const ConsolePage = () => {
 
 	const [Spaces, setSpaces] = useState([]);
 
-	const [ShowCamera, setShowCamera] = useState(false);
+	const [ShowCamera, setShowCamera] = useState(true);
 
 	useEffect(() => {
 		let _spaces = [];
@@ -105,13 +109,26 @@ export const ConsolePage = () => {
 				<h1>Console</h1>
 
 				<div style={{ display: 'flex', paddingTop: '15px' }}>
-					<div style={{ padding: '10px', maxWidth: '600px' }}>
+					<LocalAreaDataComponent spaces={Spaces} />
+
+					<div
+						style={{
+							padding: '10px',
+							maxWidth: componentWidth,
+							paddingLeft: '120px',
+							fontSize: consoleFontSize,
+						}}
+					>
 						<p>Home Services</p>
 
-						<p>{Spaces.map((_) => '-')}</p>
+						<p>
+							{Spaces.map((_, index) => (
+								<span key={index}>-</span>
+							))}
+						</p>
 
-						{Services.map((service) => (
-							<p>
+						{Services.map((service, index) => (
+							<p key={index}>
 								{service.label} -{' '}
 								<span
 									style={{
@@ -161,7 +178,7 @@ export const ConsolePage = () => {
 				<div
 					style={{
 						position: 'absolute',
-						bottom: '28px',
+						top: '28px',
 						right: '28px',
 						zIndex: '10',
 					}}
