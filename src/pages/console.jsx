@@ -63,6 +63,9 @@ export const ConsolePage = () => {
 		setSpaces(realSpaces);
 	}, [Services]);
 
+	const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
+	// const isMobileDevice = true;
+
 	return (
 		<div>
 			<Helmet>
@@ -81,8 +84,12 @@ export const ConsolePage = () => {
 
 				<style>
 					{`
-					* {
+					${
+						!isMobileDevice
+							? `* {
 						overflow: hidden !important;
+					}`
+							: ''
 					}
 
 					body {
@@ -108,15 +115,21 @@ export const ConsolePage = () => {
 			<div style={{ padding: '25px' }}>
 				<h1>Console</h1>
 
-				<div style={{ display: 'flex', paddingTop: '15px' }}>
+				<div
+					style={{
+						display: !isMobileDevice ? 'flex' : null,
+						paddingTop: '15px',
+					}}
+				>
 					<LocalAreaDataComponent spaces={Spaces} />
 
 					<div
 						style={{
 							padding: '10px',
 							maxWidth: componentWidth,
-							paddingLeft: '120px',
+							paddingLeft: !isMobileDevice ? '120px' : '10px',
 							fontSize: consoleFontSize,
+							paddingTop: isMobileDevice ? '35px' : null,
 						}}
 					>
 						<p>Home Services</p>
@@ -174,7 +187,7 @@ export const ConsolePage = () => {
 				</div>
 			</div>
 
-			{ShowCamera && (
+			{!isMobileDevice && ShowCamera && (
 				<div
 					style={{
 						position: 'absolute',
