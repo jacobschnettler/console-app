@@ -63,8 +63,8 @@ export const ConsolePage = () => {
 		setSpaces(realSpaces);
 	}, [Services]);
 
-	const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
-	// const isMobileDevice = true;
+	// const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
+	const isMobileDevice = true;
 
 	return (
 		<div>
@@ -121,7 +121,10 @@ export const ConsolePage = () => {
 						paddingTop: '15px',
 					}}
 				>
-					<LocalAreaDataComponent spaces={Spaces} />
+					<LocalAreaDataComponent
+						spaces={Spaces}
+						isMobileDevice={isMobileDevice}
+					/>
 
 					<div
 						style={{
@@ -142,7 +145,8 @@ export const ConsolePage = () => {
 
 						{Services.map((service, index) => (
 							<p key={index}>
-								{service.label} -{' '}
+								{service.label}
+								{isMobileDevice ? <br /> : ' - '}
 								<span
 									style={{
 										color:
