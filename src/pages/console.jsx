@@ -63,8 +63,8 @@ export const ConsolePage = () => {
 		setSpaces(realSpaces);
 	}, [Services]);
 
-	// const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
-	const isMobileDevice = true;
+	const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
+	// const isMobileDevice = true;
 
 	return (
 		<div>
