@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { componentWidth, consoleFontSize } from '../../pages';
 
-export const LocalAreaDataComponent = ({ spaces }) => {
+export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
 	const [Time, setTime] = useState('');
 
 	useEffect(() => {
@@ -18,62 +18,37 @@ export const LocalAreaDataComponent = ({ spaces }) => {
 
 	useEffect(() => {
 		// Fetch latitude and longitude from zip code using a geocoding service
-		fetch(
-			`https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode}&appid=${apiKey}`
-		)
-			.then((response) => response.json())
-			.then((geoData) => {
-				const { lat, lon } = geoData;
-				// Once we have latitude and longitude, fetch weather data
-				fetch(
-					`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
-				)
-					.then((response) => response.json())
-					.then((data) => {
-						setWeatherData(data);
-					})
-					.catch((error) => {
-						console.error('Error fetching weather data:', error);
-					});
-			})
-			.catch((error) => {
-				console.error('Error fetching coordinates:', error);
-			});
+		function fetchData() {
+			fetch(
+				`https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode}&appid=${apiKey}`
+			)
+				.then((response) => response.json())
+				.then((geoData) => {
+					const { lat, lon } = geoData;
+					// Once we have latitude and longitude, fetch weather data
+					fetch(
+						`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+					)
+						.then((response) => response.json())
+						.then((data) => {
+							setWeatherData(data);
+						})
+						.catch((error) => {
+							console.error(
+								'Error fetching weather data:',
+								error
+							);
+						});
+				})
+				.catch((error) => {
+					console.error('Error fetching coordinates:', error);
+				});
+		}
+
+		fetchData();
+
+		setInterval(fetchData, 300000);
 	}, [zipCode, apiKey]);
-
-	const [SelectedIndex, setSelectedIndex] = useState(0);
-
-	useEffect(() => {
-		const handleKeyDown = (event) => {
-			if (event.keyCode === 9) {
-				event.preventDefault();
-
-				setSelectedIndex((index) => (index = index + 1));
-
-				if (SelectedIndex == 1) return setSelectedIndex(0);
-			}
-
-			if (event.keyCode === 13) {
-				event.preventDefault();
-
-				switch (SelectedIndex) {
-					case 1:
-						window.open(
-							'https://www.accuweather.com/en/us/tannersville/18372/weather-forecast/2125776',
-							'_blank'
-						);
-
-						break;
-				}
-			}
-		};
-
-		document.addEventListener('keydown', handleKeyDown);
-
-		return () => {
-			document.removeEventListener('keydown', handleKeyDown);
-		};
-	}, [SelectedIndex]); // Empty dependency array ensures that this effect runs only once
 
 	// Convert temperature from Celsius to Fahrenheit
 	const celsiusToFahrenheit = (celsius) => {
@@ -86,6 +61,7 @@ export const LocalAreaDataComponent = ({ spaces }) => {
 				padding: '10px',
 				maxWidth: componentWidth,
 				fontSize: consoleFontSize,
+				paddingTop: '15px',
 			}}
 		>
 			<p>Date & Time</p>
@@ -144,7 +120,7 @@ export const LocalAreaDataComponent = ({ spaces }) => {
 					<span
 						style={{
 							color:
-								SelectedIndex == 1
+								selectedIndex == 1
 									? 'rgb(100, 149, 237)'
 									: 'rgb(255, 255, 255)',
 							textDecoration: 'underline',
