@@ -126,11 +126,11 @@ export const ConsolePage = () => {
 						isMobileDevice={isMobileDevice}
 					/> */}
 
-					{/* <CameraFeedComponent
-						isMobileDevice={isMobileDevice}
-						showCamera={ShowCamera}
-						setShowCamera={setShowCamera}
-					/> */}
+					<CameraFeedComponent
+					// isMobileDevice={isMobileDevice}
+					// showCamera={ShowCamera}
+					// setShowCamera={setShowCamera}
+					/>
 				</div>
 			</div>
 		</div>
