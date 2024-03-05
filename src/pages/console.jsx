@@ -61,6 +61,12 @@ export const ConsolePage = () => {
 
 	// const isMobileDevice = true;
 
+	useEffect(function() {
+		setTimeout(function() {
+			window.location.reload();
+		}, 30 * 60000);
+	}, []);
+
 	return (
 		<div>
 			<HeadTagsComponent isMobileDevice={isMobileDevice} />
