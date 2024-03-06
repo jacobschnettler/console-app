@@ -60,13 +60,7 @@ export const ConsolePage = () => {
 	}, [SelectedIndex]); // Empty dependency array ensures that this effect runs only once
 
 	// const isMobileDevice = true;
-
-	useEffect(function() {
-		setTimeout(function() {
-			window.location.reload();
-		}, 30 * 60000);
-	}, []);
-
+	
 	return (
 		<div>
 			<HeadTagsComponent isMobileDevice={isMobileDevice} />
