@@ -64,7 +64,7 @@ export const ConsolePage = () => {
 	useEffect(function() {
 		setTimeout(function() {
 			window.location.reload();
-		}, 10 * 60000);
+		}, 30 * 60000);
 	}, []);
 
 	return (
