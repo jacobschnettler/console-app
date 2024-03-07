@@ -33,14 +33,15 @@ export const CameraFeedComponent = ({
 			padding: '10px',
 			paddingTop: '35px',
 			width: '100%',
+			height: '100%',
 			// backgroundColor: 'green',
 		}}
 	>
 		<div
 			style={{
-				height: isMobileDevice ? '200px' : '325px',
-				width: isMobileDevice ? '100%' : '60%',
-				// backgroundColor: 'gray',
+				height: `${1920 * 0.25}px`,
+				width: `${1080 * 0.25}px`,
+				backgroundColor: 'gray',
 				borderRadius: '6px',
 				backgroundPosition: 'center',
 				backgroundRepeat: 'no-repeat',

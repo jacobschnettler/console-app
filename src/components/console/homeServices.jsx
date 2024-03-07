@@ -15,7 +15,7 @@ export const HomeServicesComponent = ({
 		for (let i = 0; i < Services.length; i++) {
 			var service = Services[i];
 
-			var spaces = (service.label + ' - ' + service.status).length;
+			var spaces = 'Tire Pressure: 38 38 38 38'.length;
 
 			_spaces.push(spaces);
 		}

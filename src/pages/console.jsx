@@ -5,11 +5,13 @@ import {
 	HomeServicesComponent,
 	HeadTagsComponent,
 	CameraFeedComponent,
+	VehicleDataComponent,
+	PlantTrackerComponent,
 } from '../components';
 
 import { AuthContext } from '../contexts';
 
-export const consoleFontSize = '22px';
+export const consoleFontSize = '18px';
 export const componentWidth = '700px';
 
 export const ConsolePage = () => {
@@ -60,13 +62,13 @@ export const ConsolePage = () => {
 	}, [SelectedIndex]); // Empty dependency array ensures that this effect runs only once
 
 	// const isMobileDevice = true;
-	
+
 	return (
 		<div>
 			<HeadTagsComponent isMobileDevice={isMobileDevice} />
 
 			<div style={{ padding: '25px' }}>
-				<h1>Console</h1>
+				{/* <h1>Console	</h1> */}
 
 				<div
 					style={{
@@ -79,7 +81,7 @@ export const ConsolePage = () => {
 						href='#'
 						onClick={logoutUser}
 						target='_blank'
-						style={{ fontSize: '22px' }}
+						style={{ fontSize: consoleFontSize }}
 					>
 						<p>
 							<span
@@ -99,32 +101,65 @@ export const ConsolePage = () => {
 
 				<div
 					style={{
-						// display: !isMobileDevice ? 'flex' : null,
-						paddingTop: '15px',
-						width: 'calc(100vw - 50px)',
 						height: isMobileDevice ? '82.5vh' : '90vh',
-						// backgroundColor: 'red',
-						overflow: 'auto',
-						// paddingRight: '15px',
+						width: '100%',
 					}}
 				>
-					<LocalAreaDataComponent
-						spaces={Spaces}
-						isMobileDevice={isMobileDevice}
-						selectedIndex={SelectedIndex}
-					/>
+					<div style={{ display: 'flex' }}>
+						<div
+							style={{
+								// display: !isMobileDevice ? 'flex' : null,
+								paddingTop: '15px',
+								width: 'calc(.50 * (100vw - 50px))',
+								// backgroundColor: 'red',
+								overflow: 'auto',
+								// paddingRight: '15px',
+								paddingTop: '0',
+							}}
+						>
+							<LocalAreaDataComponent
+								spaces={Spaces}
+								isMobileDevice={isMobileDevice}
+								selectedIndex={SelectedIndex}
+							/>
 
-					<HomeServicesComponent
-						spaces={Spaces}
-						setSpaces={setSpaces}
-						isMobileDevice={isMobileDevice}
-					/>
+							<HomeServicesComponent
+								spaces={Spaces}
+								setSpaces={setSpaces}
+								isMobileDevice={isMobileDevice}
+							/>
+						</div>
 
-					{/* <HomeServicesComponent
+						<div
+							style={{
+								// display: !isMobileDevice ? 'flex' : null,
+								paddingTop: '15px',
+								width: 'calc(.50 * (100vw - 50px))',
+								// backgroundColor: 'red',
+								overflow: 'auto',
+								// paddingRight: '15px',
+								paddingTop: '0',
+							}}
+						>
+							<VehicleDataComponent
+								spaces={Spaces}
+								isMobileDevice={isMobileDevice}
+								selectedIndex={SelectedIndex}
+							/>
+
+							<PlantTrackerComponent
+								spaces={Spaces}
+								setSpaces={setSpaces}
+								isMobileDevice={isMobileDevice}
+							/>
+
+							{/* <HomeServicesComponent
 						spaces={Spaces}
 						setSpaces={setSpaces}
 						isMobileDevice={isMobileDevice}
 					/> */}
+						</div>
+					</div>
 
 					<CameraFeedComponent
 					// isMobileDevice={isMobileDevice}

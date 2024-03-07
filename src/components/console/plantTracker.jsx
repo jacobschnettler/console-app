@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { componentWidth, consoleFontSize } from '../../pages';
 
-export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
+export const PlantTrackerComponent = ({ spaces, selectedIndex }) => {
 	const [Time, setTime] = useState('');
 
 	useEffect(() => {
@@ -61,10 +61,10 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
 				padding: '10px',
 				maxWidth: componentWidth,
 				fontSize: consoleFontSize,
-				paddingTop: '0',
+				paddingTop: '35px',
 			}}
 		>
-			<p>Date & Time</p>
+			<p>Plant Growth</p>
 
 			<p>
 				{spaces.map((_, index) => (
@@ -72,45 +72,24 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
 				))}
 			</p>
 
+			<p>Daisies:</p>
+
 			{[
-				{ label: 'Time: ', text: Time },
-				{ label: 'Date: ', text: new Date().toDateString() },
+				{ label: '#1', value: 98 },
+				{ label: '#2', value: 95 },
+				{ label: '#3', value: 60 },
 			].map((service, index) => (
-				<p key={index}>
-					{service.label}
+				<p key={index} style={{ marginLeft: '15px' }}>
+					{service.label} -{' '}
 					<span
 						style={{
-							color: 'rgb(255, 255, 255)',
+							color: 'rgb(0, 255, 0)',
 						}}
 					>
-						{service.text}
+						{service.value}%
 					</span>
 				</p>
 			))}
-
-			{weatherData &&
-				[
-					{
-						label: 'Temperature: ',
-						text:
-							Math.floor(
-								celsiusToFahrenheit(
-									weatherData.main.temp
-								).toFixed(2)
-							) + '°F',
-					},
-				].map((service, index) => (
-					<p key={index}>
-						{service.label}
-						<span
-							style={{
-								color: 'rgb(255, 255, 255)',
-							}}
-						>
-							{service.text}
-						</span>
-					</p>
-				))}
 
 			{/* <a
 				href='https://www.accuweather.com/en/us/tannersville/18372/weather-forecast/2125776'
@@ -126,7 +105,7 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
 							textDecoration: 'underline',
 						}}
 					>
-						View Forcast
+						View Timelapse
 					</span>
 				</p>
 			</a> */}

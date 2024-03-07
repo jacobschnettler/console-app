@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { componentWidth, consoleFontSize } from '../../pages';
 
-export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
+export const VehicleDataComponent = ({ spaces, selectedIndex }) => {
 	const [Time, setTime] = useState('');
 
 	useEffect(() => {
@@ -64,7 +64,7 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
 				paddingTop: '0',
 			}}
 		>
-			<p>Date & Time</p>
+			<p>Vehicle Data</p>
 
 			<p>
 				{spaces.map((_, index) => (
@@ -73,8 +73,16 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
 			</p>
 
 			{[
-				{ label: 'Time: ', text: Time },
-				{ label: 'Date: ', text: new Date().toDateString() },
+				{
+					label: 'Tire Pressure: ',
+					text: (
+						<span style={{ color: 'rgb(0, 255, 0)' }}>
+							34 35 38 31
+						</span>
+					),
+				},
+				{ label: 'Fuel Range: ', text: '148 Miles' },
+				{ label: 'Odometer: ', text: '55,000' },
 			].map((service, index) => (
 				<p key={index}>
 					{service.label}
@@ -87,30 +95,6 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
 					</span>
 				</p>
 			))}
-
-			{weatherData &&
-				[
-					{
-						label: 'Temperature: ',
-						text:
-							Math.floor(
-								celsiusToFahrenheit(
-									weatherData.main.temp
-								).toFixed(2)
-							) + '°F',
-					},
-				].map((service, index) => (
-					<p key={index}>
-						{service.label}
-						<span
-							style={{
-								color: 'rgb(255, 255, 255)',
-							}}
-						>
-							{service.text}
-						</span>
-					</p>
-				))}
 
 			{/* <a
 				href='https://www.accuweather.com/en/us/tannersville/18372/weather-forecast/2125776'
@@ -126,7 +110,7 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
 							textDecoration: 'underline',
 						}}
 					>
-						View Forcast
+						Start Engine
 					</span>
 				</p>
 			</a> */}
