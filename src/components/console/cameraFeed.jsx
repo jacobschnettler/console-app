@@ -1,19 +1,31 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { loadPlayer } from 'rtsp-relay/browser';
 
 const VideoFeed = () => {
 	const canvas = useRef();
+	const [errorHandled, setErrorHandled] = useState(false);
 
 	useEffect(() => {
-		if (!canvas.current) throw new Error('Ref is null');
+		const errorHandler = () => {
+			if (!errorHandled) {
+				setErrorHandled(true);
+				window.location.href = 'http://localhost:5000/api/reopen';
+			}
+		};
 
-		// alert('loadewd');
+		window.onerror = errorHandler;
+
+		if (!canvas.current) throw new Error('Ref is null');
 
 		loadPlayer({
 			url: 'ws://localhost:2000/api/stream',
 			canvas: canvas.current,
 		});
-	}, []);
+
+		return () => {
+			window.onerror = null; // Cleanup to remove the error handler
+		};
+	}, [errorHandled]);
 
 	return <canvas ref={canvas} style={{ width: '100%' }} />;
 };
@@ -25,23 +37,16 @@ export const CameraFeedComponent = ({
 }) => (
 	<div
 		style={{
-			// position: 'absolute',
-			// bottom: '80px',
-			// left: '35px',
-			// right: '35px',
-			// zIndex: '10',
 			padding: '10px',
 			paddingTop: '35px',
 			width: '100%',
 			height: '100%',
-			// backgroundColor: 'green',
 		}}
 	>
 		<div
 			style={{
 				height: `${1920 * 0.25}px`,
-				width: `${1080 * 0.25}px`,
-				backgroundColor: 'gray',
+				width: `100%`,
 				borderRadius: '6px',
 				backgroundPosition: 'center',
 				backgroundRepeat: 'no-repeat',
@@ -59,31 +64,13 @@ export const CameraFeedComponent = ({
 					position: 'relative',
 				}}
 			>
-				{/* <p style={{ fontSize: '24px', margin: '0', padding: '0' }}>
-					No Feed.
-				</p> */}
 				<div
 					style={{
 						position: 'absolute',
-						// zIndex: '15',
-						// right: '14px',
-						// textAlign: 'right',
 						right: '20px',
-						// paddingRight: '14px',
 						top: '10px',
 					}}
-				>
-					{/* <p
-						style={{
-							fontWeight: '600',
-							fontSize: '24px',
-							cursor: 'pointer',
-						}}
-						onClick={() => setShowCamera(false)}
-					>
-						&#10006;
-					</p> */}
-				</div>
+				></div>
 			</div>
 		</div>
 	</div>

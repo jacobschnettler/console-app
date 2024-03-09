@@ -147,11 +147,11 @@ export const ConsolePage = () => {
 								selectedIndex={SelectedIndex}
 							/>
 
-							<PlantTrackerComponent
+							{/* <PlantTrackerComponent
 								spaces={Spaces}
 								setSpaces={setSpaces}
 								isMobileDevice={isMobileDevice}
-							/>
+							/> */}
 
 							{/* <HomeServicesComponent
 						spaces={Spaces}
@@ -161,11 +161,18 @@ export const ConsolePage = () => {
 						</div>
 					</div>
 
-					<CameraFeedComponent
-					// isMobileDevice={isMobileDevice}
-					// showCamera={ShowCamera}
-					// setShowCamera={setShowCamera}
-					/>
+					<div
+						style={{
+							width: 'calc((100vw - 50px))',
+							height: '100%',
+						}}
+					>
+						<CameraFeedComponent
+						// isMobileDevice={isMobileDevice}
+						// showCamera={ShowCamera}
+						// setShowCamera={setShowCamera}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
