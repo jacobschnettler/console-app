@@ -1,59 +1,19 @@
 import { useEffect, useState } from 'react';
 import { componentWidth, consoleFontSize } from '../../pages';
+import { fetchSubaruData } from '../../utils';
 
 export const VehicleDataComponent = ({ spaces, selectedIndex }) => {
-	const [Time, setTime] = useState('');
+	const [TirePressure, setTirePressure] = useState([]);
+	const [FuelRange, setFuelRange] = useState(null);
+	const [Odometer, setOdometer] = useState(null);
 
 	useEffect(() => {
-		setTime(new Date().toLocaleTimeString());
-
-		setInterval(() => {
-			setTime(new Date().toLocaleTimeString());
-		}, 1000);
+		fetchSubaruData().then(({ data }) => {
+			setOdometer(data.rawMiles);
+			setFuelRange(data.rawMilage);
+			setTirePressure(data.tirePressure);
+		});
 	}, []);
-
-	const [weatherData, setWeatherData] = useState(null);
-	const apiKey = 'e06808c68e8782f07704bdc84b609742';
-	const zipCode = '18372'; // Replace with the desired ZIP code
-
-	useEffect(() => {
-		// Fetch latitude and longitude from zip code using a geocoding service
-		function fetchData() {
-			fetch(
-				`https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode}&appid=${apiKey}`
-			)
-				.then((response) => response.json())
-				.then((geoData) => {
-					const { lat, lon } = geoData;
-					// Once we have latitude and longitude, fetch weather data
-					fetch(
-						`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
-					)
-						.then((response) => response.json())
-						.then((data) => {
-							setWeatherData(data);
-						})
-						.catch((error) => {
-							console.error(
-								'Error fetching weather data:',
-								error
-							);
-						});
-				})
-				.catch((error) => {
-					console.error('Error fetching coordinates:', error);
-				});
-		}
-
-		fetchData();
-
-		setInterval(fetchData, 300000);
-	}, [zipCode, apiKey]);
-
-	// Convert temperature from Celsius to Fahrenheit
-	const celsiusToFahrenheit = (celsius) => {
-		return (celsius * 9) / 5 + 32;
-	};
 
 	return (
 		<div
@@ -75,14 +35,14 @@ export const VehicleDataComponent = ({ spaces, selectedIndex }) => {
 			{[
 				{
 					label: 'Tire Pressure: ',
-					text: (
-						<span style={{ color: 'rgb(0, 255, 0)' }}>
-							34 35 38 31
+					text: TirePressure && (
+						<span style={{ color: 'rgb(255, 255, 255)' }}>
+							{TirePressure.map(value => value + " ")}
 						</span>
 					),
 				},
-				{ label: 'Fuel Range: ', text: '148 Miles' },
-				{ label: 'Odometer: ', text: '55,000' },
+				{ label: 'Fuel Range: ', text: FuelRange && FuelRange + ' Miles' },
+				{ label: 'Odometer: ', text: Odometer && Odometer + " Miles" },
 			].map((service, index) => (
 				<p key={index}>
 					{service.label}
