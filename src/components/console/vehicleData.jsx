@@ -8,11 +8,17 @@ export const VehicleDataComponent = ({ spaces, selectedIndex }) => {
 	const [Odometer, setOdometer] = useState(null);
 
 	useEffect(() => {
-		fetchSubaruData().then(({ data }) => {
-			setOdometer(data.rawMiles);
-			setFuelRange(data.rawMilage);
-			setTirePressure(data.tirePressure);
-		});
+		function fetchData () {
+			fetchSubaruData().then(({ data }) => {
+				setOdometer(data.rawMiles);
+				setFuelRange(data.rawMilage);
+				setTirePressure(data.tirePressure);
+			});
+		}
+
+		fetchData();
+
+		setInterval(fetchData, 60000);
 	}, []);
 
 	return (
