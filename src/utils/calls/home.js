@@ -3,5 +3,5 @@
 import { API } from '../api';
 
 export function fetchHomeServices() {
-	return API.get('/home/services');
+	return API.get('/services/get');
 }

@@ -1,33 +1,13 @@
-import { useRef, useEffect, useState } from 'react';
-import { loadPlayer } from 'rtsp-relay/browser';
-
 const VideoFeed = () => {
-	const canvas = useRef();
-	const [errorHandled, setErrorHandled] = useState(false);
+	const scale = 0.25
 
-	useEffect(() => {
-		const errorHandler = () => {
-			if (!errorHandled) {
-				setErrorHandled(true);
-				window.location.href = 'http://localhost:5000/api/reopen';
-			}
-		};
+	return (
+		<iframe
+			src='https://rtsp.jschnettler.com/stream.html?src=porch-cam'
+			style={{ pointerEvents: 'none', width: `${2560 * scale}px`, height: `${1920 * scale}px`, }}
 
-		window.onerror = errorHandler;
-
-		if (!canvas.current) throw new Error('Ref is null');
-
-		loadPlayer({
-			url: 'ws://localhost:2000/api/stream',
-			canvas: canvas.current,
-		});
-
-		return () => {
-			window.onerror = null; // Cleanup to remove the error handler
-		};
-	}, [errorHandled]);
-
-	return <canvas ref={canvas} style={{ width: '100%' }} />;
+		/>
+	)
 };
 
 export const CameraFeedComponent = ({

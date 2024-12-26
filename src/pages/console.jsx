@@ -1,15 +1,11 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
 	LocalAreaDataComponent,
 	HomeServicesComponent,
 	HeadTagsComponent,
-	CameraFeedComponent,
-	VehicleDataComponent,
-	PlantTrackerComponent,
+	CameraFeedComponent
 } from '../components';
-
-import { AuthContext } from '../contexts';
 
 export const consoleFontSize = '18px';
 export const componentWidth = '700px';
@@ -23,7 +19,7 @@ export const ConsolePage = () => {
 
 	const [SelectedIndex, setSelectedIndex] = useState(0);
 
-	const { logoutUser } = useContext(AuthContext);
+	function logoutUser() { }
 
 	useEffect(() => {
 		const handleKeyDown = (event) => {
@@ -59,17 +55,13 @@ export const ConsolePage = () => {
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown);
 		};
-	}, [SelectedIndex]); // Empty dependency array ensures that this effect runs only once
-
-	// const isMobileDevice = true;
+	}, [SelectedIndex]);
 
 	return (
 		<div>
 			<HeadTagsComponent isMobileDevice={isMobileDevice} />
 
 			<div style={{ padding: '25px' }}>
-				{/* <h1>Console	</h1> */}
-
 				<div
 					style={{
 						position: 'absolute',
@@ -108,13 +100,10 @@ export const ConsolePage = () => {
 					<div style={{ display: 'flex' }}>
 						<div
 							style={{
-								// display: !isMobileDevice ? 'flex' : null,
 								paddingTop: '15px',
-								width: 'calc(.50 * (100vw - 50px))',
-								// backgroundColor: 'red',
 								overflow: 'auto',
-								// paddingRight: '15px',
 								paddingTop: '0',
+								width: 'calc(.50 * (100vw - 50px))',
 							}}
 						>
 							<LocalAreaDataComponent
@@ -129,36 +118,6 @@ export const ConsolePage = () => {
 								isMobileDevice={isMobileDevice}
 							/>
 						</div>
-
-						<div
-							style={{
-								// display: !isMobileDevice ? 'flex' : null,
-								paddingTop: '15px',
-								width: 'calc(.50 * (100vw - 50px))',
-								// backgroundColor: 'red',
-								overflow: 'auto',
-								// paddingRight: '15px',
-								paddingTop: '0',
-							}}
-						>
-							<VehicleDataComponent
-								spaces={Spaces}
-								isMobileDevice={isMobileDevice}
-								selectedIndex={SelectedIndex}
-							/>
-
-							{/* <PlantTrackerComponent
-								spaces={Spaces}
-								setSpaces={setSpaces}
-								isMobileDevice={isMobileDevice}
-							/> */}
-
-							{/* <HomeServicesComponent
-						spaces={Spaces}
-						setSpaces={setSpaces}
-						isMobileDevice={isMobileDevice}
-					/> */}
-						</div>
 					</div>
 
 					<div
@@ -167,11 +126,7 @@ export const ConsolePage = () => {
 							height: '100%',
 						}}
 					>
-						<CameraFeedComponent
-						// isMobileDevice={isMobileDevice}
-						// showCamera={ShowCamera}
-						// setShowCamera={setShowCamera}
-						/>
+						<CameraFeedComponent />
 					</div>
 				</div>
 			</div>

@@ -39,11 +39,15 @@ export const HomeServicesComponent = ({
 
 	useEffect(() => {
 		function fetchServices() {
-			fetchHomeServices().then(({ data }) => {
-				if (data.error) return alert(data.error);
-
-				setServices(data.services);
-			});
+			try {
+				fetchHomeServices().then(({ data }) => {
+					if (data.error) return alert(data.error);
+	
+					setServices(data.services);
+				});
+			} catch(err) {
+				console.log(err)
+			}
 		}
 
 		setInterval(fetchServices, 30000);
