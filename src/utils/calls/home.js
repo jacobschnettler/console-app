@@ -1,7 +1,7 @@
 // Home automation calls
 
-import { API } from '../api';
+import { API } from "../api";
 
 export function fetchHomeServices() {
-	return API.get('/services/get');
+  return API.get("/services/get");
 }

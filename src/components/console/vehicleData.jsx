@@ -1,68 +1,68 @@
-import { useEffect, useState } from 'react';
-import { componentWidth, consoleFontSize } from '../../pages';
-import { fetchSubaruData } from '../../utils';
+import { useEffect, useState } from "react";
+import { componentWidth, consoleFontSize } from "../../pages";
+import { fetchSubaruData } from "../../utils";
 
 export const VehicleDataComponent = ({ spaces, selectedIndex }) => {
-	const [TirePressure, setTirePressure] = useState([]);
-	const [FuelRange, setFuelRange] = useState(null);
-	const [Odometer, setOdometer] = useState(null);
+  const [TirePressure, setTirePressure] = useState([]);
+  const [FuelRange, setFuelRange] = useState(null);
+  const [Odometer, setOdometer] = useState(null);
 
-	useEffect(() => {
-		function fetchData () {
-			fetchSubaruData().then(({ data }) => {
-				setOdometer(data.rawMiles);
-				setFuelRange(data.rawMilage);
-				setTirePressure(data.tirePressure);
-			});
-		}
+  useEffect(() => {
+    function fetchData() {
+      fetchSubaruData().then(({ data }) => {
+        setOdometer(data.rawMiles);
+        setFuelRange(data.rawMilage);
+        setTirePressure(data.tirePressure);
+      });
+    }
 
-		fetchData();
+    fetchData();
 
-		setInterval(fetchData, 60000);
-	}, []);
+    setInterval(fetchData, 60000);
+  }, []);
 
-	return (
-		<div
-			style={{
-				padding: '10px',
-				maxWidth: componentWidth,
-				fontSize: consoleFontSize,
-				paddingTop: '0',
-			}}
-		>
-			<p>Vehicle Data</p>
+  return (
+    <div
+      style={{
+        padding: "10px",
+        maxWidth: componentWidth,
+        fontSize: consoleFontSize,
+        paddingTop: "0",
+      }}
+    >
+      <p>Vehicle Data</p>
 
-			<p>
-				{spaces.map((_, index) => (
-					<span key={index}>-</span>
-				))}
-			</p>
+      <p>
+        {spaces.map((_, index) => (
+          <span key={index}>-</span>
+        ))}
+      </p>
 
-			{[
-				{
-					label: 'Tire Pressure: ',
-					text: TirePressure && (
-						<span style={{ color: 'rgb(255, 255, 255)' }}>
-							{TirePressure.map(value => value + " ")}
-						</span>
-					),
-				},
-				{ label: 'Fuel Range: ', text: FuelRange && FuelRange + ' Miles' },
-				{ label: 'Odometer: ', text: Odometer && Odometer + " Miles" },
-			].map((service, index) => (
-				<p key={index}>
-					{service.label}
-					<span
-						style={{
-							color: 'rgb(255, 255, 255)',
-						}}
-					>
-						{service.text}
-					</span>
-				</p>
-			))}
+      {[
+        {
+          label: "Tire Pressure: ",
+          text: TirePressure && (
+            <span style={{ color: "rgb(255, 255, 255)" }}>
+              {TirePressure.map((value) => value + " ")}
+            </span>
+          ),
+        },
+        { label: "Fuel Range: ", text: FuelRange && FuelRange + " Miles" },
+        { label: "Odometer: ", text: Odometer && Odometer + " Miles" },
+      ].map((service, index) => (
+        <p key={index}>
+          {service.label}
+          <span
+            style={{
+              color: "rgb(255, 255, 255)",
+            }}
+          >
+            {service.text}
+          </span>
+        </p>
+      ))}
 
-			{/* <a
+      {/* <a
 				href='https://www.accuweather.com/en/us/tannersville/18372/weather-forecast/2125776'
 				target='_blank'
 			>
@@ -80,6 +80,6 @@ export const VehicleDataComponent = ({ spaces, selectedIndex }) => {
 					</span>
 				</p>
 			</a> */}
-		</div>
-	);
+    </div>
+  );
 };
