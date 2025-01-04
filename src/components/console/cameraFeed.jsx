@@ -1,9 +1,9 @@
 const VideoFeed = () => {
-  const scale = 0.25;
+  const scale = 0.35;
 
   return (
     <iframe
-      src="https://rtsp.jschnettler.com/stream.html?src=porch-cam"
+      src={`${process.env.REACT_APP_RTSP_SERVER}/stream.html?src=porch-cam`}
       style={{
         pointerEvents: "none",
         width: `${2560 * scale}px`,
@@ -13,11 +13,7 @@ const VideoFeed = () => {
   );
 };
 
-export const CameraFeedComponent = ({
-  isMobileDevice,
-  showCamera,
-  setShowCamera,
-}) => (
+export const CameraFeedComponent = () => (
   <div
     style={{
       padding: "10px",

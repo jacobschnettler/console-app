@@ -7,7 +7,7 @@ import {
   CameraFeedComponent,
 } from "../components";
 
-export const consoleFontSize = "28px";
+export const consoleFontSize = "34px";
 export const componentWidth = "700px";
 
 export const ConsolePage = () => {
