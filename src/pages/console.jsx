@@ -120,14 +120,14 @@ export const ConsolePage = () => {
             </div>
           </div>
 
-          <div
+          {/*<div
             style={{
               width: "calc((100vw - 50px))",
               height: "100%",
             }}
           >
             <CameraFeedComponent />
-          </div>
+          </div>*/}
         </div>
       </div>
     </div>
