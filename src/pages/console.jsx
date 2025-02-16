@@ -7,7 +7,7 @@ import {
   CameraFeedComponent,
 } from "../components";
 
-export const consoleFontSize = "34px";
+export const consoleFontSize = "38px";
 export const componentWidth = "700px";
 
 export const ConsolePage = () => {
@@ -68,7 +68,7 @@ export const ConsolePage = () => {
             width: "100%",
           }}
         >
-          <div>
+          <div style={{padding:'30px'}}>
             <div>
               <LocalAreaDataComponent
                 spaces={Spaces}
