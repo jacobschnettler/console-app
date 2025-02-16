@@ -103,7 +103,7 @@ export const ConsolePage = () => {
                 paddingTop: "15px",
                 overflow: "auto",
                 paddingTop: "0",
-                width: "calc(.50 * (100vw - 50px))",
+                width: "calc(1 * (100vw - 50px))",
               }}
             >
               <LocalAreaDataComponent
