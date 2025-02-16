@@ -56,7 +56,7 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
     <div
       style={{
         padding: "10px",
-        maxWidth: componentWidth,
+        // maxWidth: componentWidth,
         fontSize: consoleFontSize,
         paddingTop: "0",
       }}

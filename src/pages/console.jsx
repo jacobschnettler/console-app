@@ -58,54 +58,18 @@ export const ConsolePage = () => {
   }, [SelectedIndex]);
 
   return (
-    <div>
+    <div className="main-content">
       <HeadTagsComponent isMobileDevice={isMobileDevice} />
 
-      <div style={{ padding: "25px" }}>
-        <div
-          style={{
-            position: "absolute",
-            bottom: "10px",
-            left: "35px",
-          }}
-        >
-          <a
-            href="#"
-            onClick={logoutUser}
-            target="_blank"
-            style={{ fontSize: consoleFontSize }}
-          >
-            <p>
-              <span
-                style={{
-                  color:
-                    SelectedIndex == 2
-                      ? "rgb(100, 149, 237)"
-                      : "rgb(255, 255, 255)",
-                  textDecoration: "underline",
-                }}
-              >
-                Logout
-              </span>
-            </p>
-          </a>
-        </div>
-
+      <div>
         <div
           style={{
             height: isMobileDevice ? "82.5vh" : "90vh",
             width: "100%",
           }}
         >
-          <div style={{ display: "flex" }}>
-            <div
-              style={{
-                paddingTop: "15px",
-                overflow: "auto",
-                paddingTop: "0",
-                width: "calc(1 * (100vw - 50px))",
-              }}
-            >
+          <div>
+            <div>
               <LocalAreaDataComponent
                 spaces={Spaces}
                 isMobileDevice={isMobileDevice}

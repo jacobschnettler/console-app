@@ -58,7 +58,7 @@ export const HomeServicesComponent = ({
     <div
       style={{
         padding: "10px",
-        maxWidth: componentWidth,
+        // maxWidth: componentWidth,
         // paddingLeft: !isMobileDevice ? '120px' : '10px',
         paddingLeft: "10px",
         fontSize: consoleFontSize,
