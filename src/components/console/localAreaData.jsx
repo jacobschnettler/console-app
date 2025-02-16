@@ -16,36 +16,36 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
   const apiKey = "e06808c68e8782f07704bdc84b609742";
   const zipCode = "18372"; // Replace with the desired ZIP code
 
-  useEffect(() => {
-    // Fetch latitude and longitude from zip code using a geocoding service
-    function fetchData() {
-      fetch(
-        `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode}&appid=${apiKey}`
-      )
-        .then((response) => response.json())
-        .then((geoData) => {
-          const { lat, lon } = geoData;
-          // Once we have latitude and longitude, fetch weather data
-          fetch(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              setWeatherData(data);
-            })
-            .catch((error) => {
-              console.error("Error fetching weather data:", error);
-            });
-        })
-        .catch((error) => {
-          console.error("Error fetching coordinates:", error);
-        });
-    }
+  // useEffect(() => {
+  //   // Fetch latitude and longitude from zip code using a geocoding service
+  //   function fetchData() {
+  //     fetch(
+  //       `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode}&appid=${apiKey}`
+  //     )
+  //       .then((response) => response.json())
+  //       .then((geoData) => {
+  //         const { lat, lon } = geoData;
+  //         // Once we have latitude and longitude, fetch weather data
+  //         fetch(
+  //           `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+  //         )
+  //           .then((response) => response.json())
+  //           .then((data) => {
+  //             setWeatherData(data);
+  //           })
+  //           .catch((error) => {
+  //             console.error("Error fetching weather data:", error);
+  //           });
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching coordinates:", error);
+  //       });
+  //   }
 
-    fetchData();
+  //   fetchData();
 
-    setInterval(fetchData, 300000);
-  }, [zipCode, apiKey]);
+  //   setInterval(fetchData, 300000);
+  // }, [zipCode, apiKey]);
 
   // Convert temperature from Celsius to Fahrenheit
   const celsiusToFahrenheit = (celsius) => {
@@ -85,7 +85,7 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
         </p>
       ))}
 
-      {weatherData &&
+      {/* {weatherData &&
         [
           {
             label: "Temperature: ",
@@ -105,7 +105,7 @@ export const LocalAreaDataComponent = ({ spaces, selectedIndex }) => {
               {service.text}
             </span>
           </p>
-        ))}
+        ))} */}
 
       {/* <a
 				href='https://www.accuweather.com/en/us/tannersville/18372/weather-forecast/2125776'
