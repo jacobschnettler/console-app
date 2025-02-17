@@ -58,17 +58,21 @@ export const CameraFeedComponent = ({ src }) => {
   }, [player]);
 
   return (
-    <div>
-      <video
-        ref={videoRef}
-        className="video-js"
-        controls
-        autoPlay
-        muted
-        style={{ width: `${2560 * 0.3}px`, height: `${1920 * 0.3}px`, borderRadius: "15px" }}
-      >
-        <source src={src} type="application/x-mpegURL" />
-      </video>
+    <div
+      style={{
+        overflow: 'hidden',
+        height: `${1920 * 0.3 - 50}px`
+      }}
+    >
+      <iframe
+        src="http://192.168.0.91:8083/pages/multiview/full"
+        style={{
+          width: `${2560 * 0.3}px`,
+          height: `${1920 * 0.3}px`,
+          position: 'relative',
+          top: '-30px'
+        }}
+      />
     </div>
   );
 };
