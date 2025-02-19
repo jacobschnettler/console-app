@@ -84,7 +84,7 @@ export const ConsolePage = () => {
             </div>
           </div>
 
-          <div
+          {/* <div
             style={{
               width: "calc((100vw - 50px))",
               height: "100%",
@@ -92,7 +92,7 @@ export const ConsolePage = () => {
             }}
           >
             <CameraFeedComponent src='http://192.168.0.91:8083/stream/pattern/channel/0/hls/live/index.m3u8' />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
